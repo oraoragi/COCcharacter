@@ -11,26 +11,36 @@
     <div class="container">
         <h1>クトゥルフ神話TRPG キャラクター情報</h1>
         <form id="characterForm">
-            <label for="name">名前:</label>
-            <input type="text" id="name" required>
-            <label for="furigana">フリガナ:</label>
-            <input type="text" id="furigana" required>
+            <div class="form-group">
+                <label for="name">名前:</label>
+                <input type="text" id="name" required>
+                <label for="furigana">フリガナ:</label>
+                <input type="text" id="furigana" required>
+            </div>
 
-            <label for="occupation">職業:</label>
-            <input type="text" id="occupation" required>
+            <div class="form-group">
+                <label for="occupation">職業:</label>
+                <input type="text" id="occupation" required>
+            </div>
 
-            <label for="nationality">国籍:</label>
-            <input type="text" id="nationality" required>
+            <div class="form-group">
+                <label for="nationality">国籍:</label>
+                <input type="text" id="nationality" required>
+            </div>
 
-            <label for="age">年齢:</label>
-            <input type="number" id="age" required>
+            <div class="form-group">
+                <label for="age">年齢:</label>
+                <input type="number" id="age" required>
+            </div>
 
-            <label for="gender">性別:</label>
-            <select id="gender" required>
-                <option value="男">男</option>
-                <option value="女">女</option>
-                <option value="その他">その他</option>
-            </select>
+            <div class="form-group">
+                <label for="gender">性別:</label>
+                <select id="gender" required>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
 
             <h3>能力値</h3>
             <table>
@@ -56,16 +66,18 @@
                 </tr>
             </table>
 
-            <label for="skills">技能値:</label>
-            <textarea id="skills" required></textarea>
+            <div class="form-group">
+                <label for="skills">技能値:</label>
+                <textarea id="skills" required></textarea>
+            </div>
 
             <h3>所持している呪文</h3>
             <div id="spellsContainer">
                 <div class="spell">
                     <label for="spellName">名前:</label>
-                    <input type="text" class="spellName">
+                    <input type="text" class="spellName" required>
                     <label for="spellEffect">効果:</label>
-                    <input type="text" class="spellEffect">
+                    <input type="text" class="spellEffect" required>
                 </div>
             </div>
             <button type="button" id="addSpell">呪文を追加</button>
@@ -74,18 +86,22 @@
             <div id="artifactsContainer">
                 <div class="artifact">
                     <label for="artifactName">名前:</label>
-                    <input type="text" class="artifactName">
+                    <input type="text" class="artifactName" required>
                     <label for="artifactEffect">効果:</label>
-                    <input type="text" class="artifactEffect">
+                    <input type="text" class="artifactEffect" required>
                 </div>
             </div>
             <button type="button" id="addArtifact">アーティファクトを追加</button>
 
-            <label for="scenarios">参加したシナリオ:</label>
-            <textarea id="scenarios"></textarea>
+            <div class="form-group">
+                <label for="scenarios">参加したシナリオ:</label>
+                <textarea id="scenarios"></textarea>
+            </div>
 
-            <label for="notes">メモ欄:</label>
-            <textarea id="notes"></textarea>
+            <div class="form-group">
+                <label for="notes">メモ欄:</label>
+                <textarea id="notes"></textarea>
+            </div>
 
             <button type="submit">キャラクターを追加</button>
         </form>
