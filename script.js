@@ -3,6 +3,7 @@ document.getElementById('characterForm').addEventListener('submit', function(eve
 
     const character = {
         name: document.getElementById('name').value,
+        furigana: document.getElementById('furigana').value,
         occupation: document.getElementById('occupation').value,
         nationality: document.getElementById('nationality').value,
         age: document.getElementById('age').value,
@@ -18,15 +19,43 @@ document.getElementById('characterForm').addEventListener('submit', function(eve
             EDU: document.getElementById('edu').value,
         },
         skills: document.getElementById('skills').value,
-        spells: document.getElementById('spells').value,
-        artifacts: document.getElementById('artifacts').value,
+        spells: getSpells(),
+        artifacts: getArtifacts(),
         scenarios: document.getElementById('scenarios').value,
         notes: document.getElementById('notes').value,
     };
 
     addCharacterToList(character);
     document.getElementById('characterForm').reset();
+    document.getElementById('spellsContainer').innerHTML = '';
+    document.getElementById('artifactsContainer').innerHTML = '';
 });
+
+function getSpells() {
+    const spells = [];
+    const spellElements = document.querySelectorAll('.spell');
+    spellElements.forEach(spell => {
+        const name = spell.querySelector('.spellName').value;
+        const effect = spell.querySelector('.spellEffect').value;
+        if (name && effect) {
+            spells.push({ name, effect });
+        }
+    });
+    return spells;
+}
+
+function getArtifacts() {
+    const artifacts = [];
+    const artifactElements = document.querySelectorAll('.artifact');
+    artifactElements.forEach(artifact => {
+        const name = artifact.querySelector('.artifactName').value;
+        const effect = artifact.querySelector('.artifactEffect').value;
+        if (name && effect) {
+            artifacts.push({ name, effect });
+        }
+    });
+    return artifacts;
+}
 
 function addCharacterToList(character) {
     const characterList = document.getElementById('characterList');
@@ -34,28 +63,11 @@ function addCharacterToList(character) {
     characterDiv.className = 'character';
 
     characterDiv.innerHTML = `
-        <h3>${character.name}</h3>
+        <h3>${character.name} (${character.furigana})</h3>
         <p>職業: ${character.occupation}</p>
         <p>国籍: ${character.nationality}</p>
         <p>年齢: ${character.age}</p>
         <p>性別: ${character.gender}</p>
         <h4>能力値</h4>
         <ul>
-            <li>STR: ${character.abilities.STR}</li>
-            <li>CON: ${character.abilities.CON}</li>
-            <li>POW: ${character.abilities.POW}</li>
-            <li>DEX: ${character.abilities.DEX}</li>
-            <li>APP: ${character.abilities.APP}</li>
-            <li>SIZ: ${character.abilities.SIZ}</li>
-            <li>INT: ${character.abilities.INT}</li>
-            <li>EDU: ${character.abilities.EDU}</li>
-        </ul>
-        <p>技能値: ${character.skills}</p>
-        <p>所持している呪文: ${character.spells}</p>
-        <p>所持しているアーティファクト: ${character.artifacts}</p>
-        <p>参加したシナリオ: ${character.scenarios}</p>
-        <p>メモ欄: ${character.notes}</p>
-    `;
-
-    characterList.appendChild(characterDiv);
-}
+            <li
