@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クトゥルフ神話TRPG キャラクター情報</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>クトゥルフ神話TRPG キャラクター情報</h1>
+    <form id="characterForm">
+        <label for="name">名前:</label>
+        <input type="text" id="name" required>
+
+        <label for="occupation">職業:</label>
+        <input type="text" id="occupation" required>
+
+        <label for="nationality">国籍:</label>
+        <input type="text" id="nationality" required>
+
+        <label for="age">年齢:</label>
+        <input type="number" id="age" required>
+
+        <label for="gender">性別:</label>
+        <select id="gender" required>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
+        </select>
+
+        <h3>能力値</h3>
+        <label for="str">STR:</label>
+        <input type="number" id="str" required>
+        <label for="con">CON:</label>
+        <input type="number" id="con" required>
+        <label for="pow">POW:</label>
+        <input type="number" id="pow" required>
+        <label for="dex">DEX:</label>
+        <input type="number" id="dex" required>
+        <label for="app">APP:</label>
+        <input type="number" id="app" required>
+        <label for="siz">SIZ:</label>
+        <input type="number" id="siz" required>
+        <label for="int">INT:</label>
+        <input type="number" id="int" required>
+        <label for="edu">EDU:</label>
+        <input type="number" id="edu" required>
+
+        <label for="skills">技能値:</label>
+        <textarea id="skills" required></textarea>
+
+        <label for="spells">所持している呪文:</label>
+        <textarea id="spells"></textarea>
+
+        <label for="artifacts">所持しているアーティファクト:</label>
+        <textarea id="artifacts"></textarea>
+
+        <label for="scenarios">参加したシナリオ:</label>
+        <textarea id="scenarios"></textarea>
+
+        <label for="notes">メモ欄:</label>
+        <textarea id="notes"></textarea>
+
+        <button type="submit">キャラクターを追加</button>
+    </form>
+
+    <h2>キャラクター一覧</h2>
+    <div id="characterList"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
