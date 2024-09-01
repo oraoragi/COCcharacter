@@ -3,113 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クトゥルフ神話TRPG キャラクター情報</title>
-    <meta name="robots" content="noindex, nofollow">
+    <title>キャラクター管理システム</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>クトゥルフ神話TRPG キャラクター情報</h1>
+        <h1>キャラクター管理システム</h1>
+        
+        <!-- キャラクター作成フォーム -->
         <form id="characterForm">
-            <div class="form-group">
-                <label for="name">名前:</label>
-                <input type="text" id="name" required>
-                <label for="furigana">フリガナ:</label>
-                <input type="text" id="furigana" required>
-            </div>
-
-            <div class="form-group">
-                <label for="occupation">職業:</label>
-                <input type="text" id="occupation" required>
-            </div>
-
-            <div class="form-group">
-                <label for="nationality">国籍:</label>
-                <input type="text" id="nationality" required>
-            </div>
-
-            <div class="form-group">
-                <label for="age">年齢:</label>
-                <input type="number" id="age" required>
-            </div>
-
-            <div class="form-group">
-                <label for="gender">性別:</label>
-                <select id="gender" required>
-                    <option value="男">男</option>
-                    <option value="女">女</option>
-                    <option value="その他">その他</option>
-                </select>
-            </div>
-
-            <h3>能力値</h3>
-            <table>
-                <tr>
-                    <th>STR</th>
-                    <th>CON</th>
-                    <th>POW</th>
-                    <th>DEX</th>
-                    <th>APP</th>
-                    <th>SIZ</th>
-                    <th>INT</th>
-                    <th>EDU</th>
-                </tr>
-                <tr>
-                    <td><input type="number" id="str" required></td>
-                    <td><input type="number" id="con" required></td>
-                    <td><input type="number" id="pow" required></td>
-                    <td><input type="number" id="dex" required></td>
-                    <td><input type="number" id="app" required></td>
-                    <td><input type="number" id="siz" required></td>
-                    <td><input type="number" id="int" required></td>
-                    <td><input type="number" id="edu" required></td>
-                </tr>
-            </table>
-
-            <div class="form-group">
-                <label for="skills">技能値:</label>
-                <textarea id="skills" required></textarea>
-            </div>
-
-            <h3>所持している呪文</h3>
-            <div id="spellsContainer">
+            <h2>キャラクター作成</h2>
+            <label for="name">名前:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="age">年齢:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="role">役割:</label>
+            <select id="role" name="role" required>
+                <option value="warrior">戦士</option>
+                <option value="mage">魔法使い</option>
+                <option value="archer">弓使い</option>
+            </select>
+            
+            <label for="bio">バイオ:</label>
+            <textarea id="bio" name="bio" rows="4" required></textarea>
+            
+            <h3>スペル</h3>
+            <div id="spells">
                 <div class="spell">
-                    <label for="spellName">名前:</label>
-                    <input type="text" class="spellName" required>
-                    <label for="spellEffect">効果:</label>
-                    <input type="text" class="spellEffect" required>
+                    <label for="spellName1">スペル名:</label>
+                    <input type="text" id="spellName1" name="spellName1">
+                    
+                    <label for="spellPower1">威力:</label>
+                    <input type="number" id="spellPower1" name="spellPower1">
                 </div>
             </div>
-            <button type="button" id="addSpell">呪文を追加</button>
-
-            <h3>所持しているアーティファクト</h3>
-            <div id="artifactsContainer">
+            <button type="button" onclick="addSpell()">スペルを追加</button>
+            
+            <h3>アーティファクト</h3>
+            <div id="artifacts">
                 <div class="artifact">
-                    <label for="artifactName">名前:</label>
-                    <input type="text" class="artifactName" required>
-                    <label for="artifactEffect">効果:</label>
-                    <input type="text" class="artifactEffect" required>
+                    <label for="artifactName1">アーティファクト名:</label>
+                    <input type="text" id="artifactName1" name="artifactName1">
+                    
+                    <label for="artifactPower1">威力:</label>
+                    <input type="number" id="artifactPower1" name="artifactPower1">
                 </div>
             </div>
-            <button type="button" id="addArtifact">アーティファクトを追加</button>
-
-            <div class="form-group">
-                <label for="scenarios">参加したシナリオ:</label>
-                <textarea id="scenarios"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="notes">メモ欄:</label>
-                <textarea id="notes"></textarea>
-            </div>
-
-            <button type="submit">キャラクターを追加</button>
+            <button type="button" onclick="addArtifact()">アーティファクトを追加</button>
+            
+            <button type="submit">キャラクターを作成</button>
         </form>
-
-        <h2>キャラクター一覧</h2>
-        <div id="characterList"></div>
+        
+        <!-- キャラクターリスト -->
+        <h2>キャラクターリスト</h2>
+        <div id="characterList">
+            <!-- ここにキャラクターのタイルが表示されます -->
+        </div>
+        
+        <!-- キャラクター詳細表示 -->
+        <div id="characterDetail" class="character-detail" style="display: none;">
+            <h2>キャラクター詳細</h2>
+            <div>
+                <strong>名前:</strong> <span id="detailName"></span>
+            </div>
+            <div>
+                <strong>年齢:</strong> <span id="detailAge"></span>
+            </div>
+            <div>
+                <strong>役割:</strong> <span id="detailRole"></span>
+            </div>
+            <div>
+                <strong>バイオ:</strong> <span id="detailBio"></span>
+            </div>
+            <div id="spellsDetail">
+                <h3>スペル</h3>
+                <!-- ここにスペルの詳細が表示されます -->
+            </div>
+            <div id="artifactsDetail">
+                <h3>アーティファクト</h3>
+                <!-- ここにアーティファクトの詳細が表示されます -->
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScriptのコードをここに記載します。
+        let spellCount = 1;
+        let artifactCount = 1;
+
+        function addSpell() {
+            spellCount++;
+            const spellDiv = document.createElement('div');
+            spellDiv.className = 'spell';
+            spellDiv.innerHTML = `
+                <label for="spellName${spellCount}">スペル名:</label>
+                <input type="text" id="spellName${spellCount}" name="spellName${spellCount}">
+                <label for="spellPower${spellCount}">威力:</label>
+                <input type="number" id="spellPower${spellCount}" name="spellPower${spellCount}">
+            `;
+            document.getElementById('spells').appendChild(spellDiv);
+        }
+
+        function addArtifact() {
+            artifactCount++;
+            const artifactDiv = document.createElement('div');
+            artifactDiv.className = 'artifact';
+            artifactDiv.innerHTML = `
+                <label for="artifactName${artifactCount}">アーティファクト名:</label>
+                <input type="text" id="artifactName${artifactCount}" name="artifactName${artifactCount}">
+                <label for="artifactPower${artifactCount}">威力:</label>
+                <input type="number" id="artifactPower${artifactCount}" name="artifactPower${artifactCount}">
+            `;
+            document.getElementById('artifacts').appendChild(artifactDiv);
+        }
+
+        document.getElementById('characterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const role = document.getElementById('role').value;
+            const bio = document.getElementById('bio').value;
+
+            const characterTile = document.createElement('div');
+            characterTile.className = 'character-tile';
+            characterTile.innerText = name;
+            characterTile.addEventListener('click', function() {
+                document.getElementById('detailName').innerText = name;
+                document.getElementById('detailAge').innerText = age;
+                document.getElementById('detailRole').innerText = role;
+                document.getElementById('detailBio').innerText = bio;
+
+                const spellsDetail = document.getElementById('spellsDetail');
+                spellsDetail.innerHTML = '<h3>スペル</h3>';
+                for (let i = 1; i <= spellCount; i++) {
+                    const spellName = document.getElementById(`spellName${i}`).value;
+                    const spellPower = document.getElementById(`spellPower${i}`).value;
+                    if (spellName && spellPower) {
+                        const spellDiv = document.createElement('div');
+                        spellDiv.innerText = `${spellName} - 威力: ${spellPower}`;
+                        spellsDetail.appendChild(spellDiv);
+                    }
+                }
+
+                const artifactsDetail = document.getElementById('artifactsDetail');
+                artifactsDetail.innerHTML = '<h3>アーティファクト</h3>';
+                for (let i = 1; i <= artifactCount; i++) {
+                    const artifactName = document.getElementById(`artifactName${i}`).value;
+                    const artifactPower = document.getElementById(`artifactPower${i}`).value;
+                    if (artifactName && artifactPower) {
+                        const artifactDiv = document.createElement('div');
+                        artifactDiv.innerText = `${artifactName} - 威力: ${artifactPower}`;
+                        artifactsDetail.appendChild(artifactDiv);
+                    }
+                }
+
+                document.getElementById('characterDetail').style.display = 'block';
+            });
+
+            document.getElementById('characterList').appendChild(characterTile);
+
+            document.getElementById('characterForm').reset();
+            spellCount = 1;
+            artifactCount = 1;
+            document.getElementById('spells').innerHTML = `
+                <div class="spell">
+                    <label for="spellName1">スペル名:</label>
+                    <input type="text" id="spellName1" name="spellName1">
+                    <label for="spellPower1">威力:</label>
+                    <input type="number" id="spellPower1" name="spellPower1">
+                </div>
+            `;
+            document.getElementById('artifacts').innerHTML = `
+                <div class="artifact">
+                    <label for="artifactName1">アーティファクト名:</label>
+                    <input type="text" id="artifactName1" name="artifactName1">
+                    <label for="artifactPower1">威力:</label>
+                    <input type="number" id="artifactPower1" name="artifactPower1">
+                </div>
+            `;
+        });
+    </script>
 </body>
 </html>
